@@ -20,6 +20,6 @@ func main() {
 
 	err = app.RunGRPCServer(listener)
 	if err != nil {
-		logrus.Errorf("run grpc server failed: %w", err)
+		logrus.Errorf("run grpc server failed: %v", err)
 	}
 }
