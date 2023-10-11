@@ -13,6 +13,6 @@ func RunGRPCServer(listener net.Listener) error {
 	grpcServer := grpc.NewServer()
 	pb.RegisterCreditCardServer(grpcServer, GetCreditCardServer())
 
-	logrus.Info("starting grpc server ...")
+	logrus.Infof("starting grpc server at %v ...", listener.Addr())
 	return grpcServer.Serve(listener)
 }
