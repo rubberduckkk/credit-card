@@ -7,8 +7,8 @@ import (
 	"google.golang.org/grpc/codes"
 
 	pb "github.com/rubberduckkk/credit-card/api/pb/credit-card"
-	"github.com/rubberduckkk/credit-card/infra/luhn"
-	"github.com/rubberduckkk/credit-card/infra/util"
+	"github.com/rubberduckkk/credit-card/internal/infra/luhn"
+	util2 "github.com/rubberduckkk/credit-card/pkg/util"
 )
 
 type creditCardServerImpl struct {
@@ -27,22 +27,22 @@ func GetCreditCardServer() pb.CreditCardServer {
 
 func (c *creditCardServerImpl) Validate(ctx context.Context, card *pb.Card) (*pb.Status, error) {
 	if card == nil {
-		return util.PBStatus(codes.InvalidArgument, "err: credit card is empty"), nil
+		return util2.PBStatus(codes.InvalidArgument, "err: credit card is empty"), nil
 	}
 
-	digits, err := util.ConvertStringToDigitArray(card.Number)
+	digits, err := util2.ConvertStringToDigitArray(card.Number)
 	if err != nil {
-		return util.PBStatus(codes.InvalidArgument, "err: invalid credit card number"), nil
+		return util2.PBStatus(codes.InvalidArgument, "err: invalid credit card number"), nil
 	}
 
 	valid, err := luhn.IsValidLuhn(digits)
 	if err != nil {
-		return util.PBStatus(codes.Internal, fmt.Sprintf("validate credit card failed: %v", err)), nil
+		return util2.PBStatus(codes.Internal, fmt.Sprintf("validate credit card failed: %v", err)), nil
 	}
 
 	if !valid {
-		return util.PBStatus(codes.InvalidArgument, "err: credit card number is not valid"), nil
+		return util2.PBStatus(codes.InvalidArgument, "err: credit card number is not valid"), nil
 	}
 
-	return util.PBStatus(codes.OK, "success: credit card number is valid"), nil
+	return util2.PBStatus(codes.OK, "success: credit card number is valid"), nil
 }

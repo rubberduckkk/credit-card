@@ -11,8 +11,8 @@ import (
 
 	creditcard "github.com/rubberduckkk/credit-card/api/pb/credit-card"
 	pb "github.com/rubberduckkk/credit-card/api/pb/credit-card"
-	"github.com/rubberduckkk/credit-card/infra/luhn"
-	"github.com/rubberduckkk/credit-card/infra/util"
+	"github.com/rubberduckkk/credit-card/internal/infra/luhn"
+	"github.com/rubberduckkk/credit-card/pkg/util"
 )
 
 func TestGetCreditCardServer(t *testing.T) {

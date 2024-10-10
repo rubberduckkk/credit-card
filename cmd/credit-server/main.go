@@ -6,8 +6,8 @@ import (
 
 	"github.com/sirupsen/logrus"
 
-	"github.com/rubberduckkk/credit-card/app"
-	"github.com/rubberduckkk/credit-card/infra/config"
+	"github.com/rubberduckkk/credit-card/internal/app"
+	"github.com/rubberduckkk/credit-card/internal/infra/config"
 )
 
 func main() {
